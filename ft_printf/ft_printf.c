@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thtay <thtay@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/19 21:22:01 by thtay             #+#    #+#             */
-/*   Updated: 2025/12/19 21:22:02 by thtay            ###   ########.fr       */
+/*   Created: 2025/12/19 21:36:29 by thtay             #+#    #+#             */
+/*   Updated: 2025/12/19 21:36:32 by thtay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,5 @@
 //  libft.h  ||  //  s string     i integer     X UPPER HEX          ||
 //           ||  //  p pointer    u unsigned    % Control / escape   ||
 //|||||||||||||  ////////////////////////////////////////////////////||
-
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <stdio.h>
 
 int	ft_printf(const char *, ...);
