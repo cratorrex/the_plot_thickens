@@ -10,4 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+// read, malloc, free
+//
+// helper functions go here
+//
 
+#include "get_next_line.h"

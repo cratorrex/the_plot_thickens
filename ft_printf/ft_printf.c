@@ -24,4 +24,9 @@
 //           ||  //  p pointer    u unsigned    % Control / escape   ||
 //|||||||||||||  ////////////////////////////////////////////////////||
 
-int	ft_printf(const char *, ...);
+#include "ft_printf.h"
+
+int	ft_printf(const char *, ...)
+{
+
+}
