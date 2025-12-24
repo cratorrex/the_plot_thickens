@@ -22,8 +22,8 @@
 // ! successive call of read().
 //
 // [     n  ] 
-//        [        ]
-//                  [        ]
+//        >>>[        ]
+//                  >>>[        ]
 // -D BUFFER_SIZE=10
 //
 
@@ -31,11 +31,11 @@
 
 char	*get_next_line(int fd)
 {
-	static char			*BUFFER;
+	static char			*stash;
 	static size_t		r_idx;
 
 	if (BUFFER_SIZE == 0)
 		return (NULL);
-	BUFFER = NULL;
+	stash = NULL;
 	r_idx = 0;
 }

@@ -14,5 +14,78 @@
 //
 // helper functions go here
 //
+// strjoin, strdup, strchr, bud_trim, strlen
 
 #include "get_next_line.h"
+
+//here we go again...
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+//both have been malloced. so they have to also be freed.
+//malloc a new string.
+char	*ft_strjoin(char *s1, char *s2)
+{
+	size_t	init;
+	size_t	cat;
+	char	*join;
+
+	init = 0;
+	cat = 0;
+	join = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!join)
+		return (NULL);
+	while (s1[init])
+	{
+		join[init] = s1[init];
+		init++;
+	}
+	while (s2[cat])
+	{
+		join[init + cat] = s2[cat];
+		cat++;
+	}
+	join[init + cat] = '\0';
+	free(s1);
+	free(s2);
+	return (join);
+}
+
+//find \n or \0.
+// char	*ft_strchr(char	*str, char c)
+// {
+
+// }
+
+//just trim the back, return the front.
+//similar to strndup.
+// char	*ft_budtrim(char *str, size_t idx)
+// {
+
+// }
+
+//colon three c comma question mark
+char	*ft_strdup(char *str)
+{
+	size_t	i;
+	char	*new;
+
+	new = malloc(ft_strlen(str) + 1);
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (str[i])
+	{
+		new[i] = str[i];
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
+}
