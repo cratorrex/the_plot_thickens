@@ -31,6 +31,7 @@ size_t	ft_strlen(const char *str)
 
 //both have been malloced. so they have to also be freed.
 //malloc a new string.
+//stash is now s1 cat s2.
 char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	init;
@@ -64,12 +65,36 @@ char	*ft_strjoin(char *s1, char *s2)
 
 // }
 
-//just trim the back, return the front.
+//just trim and free the front.
 //similar to strndup.
-// char	*ft_budtrim(char *str, size_t idx)
-// {
+char	*ft_budtrim(char *str, size_t idx, char *join)
+{
+	size_t	i;
+	char	*cat;
+	char	*ret;
 
-// }
+	i = 0;
+	cat = malloc(idx + 1);
+	if (!cat)
+		return (NULL);
+	while (i < idx)
+	{
+		cat[i] = str[i];
+		i ++;
+	}
+	cat[i] = '\0';
+	join = ft_strjoin(join, cat);
+	ret = malloc(ft_strlen(str) - idx + 1);
+	if (!ret)
+		return (NULL);
+	while (str[i])
+	{
+		ret[i - idx] = str[i];
+		i ++;
+	}
+	ret[i - idx] = '\0';
+	return (ret);
+}
 
 //colon three c comma question mark
 char	*ft_strdup(char *str)

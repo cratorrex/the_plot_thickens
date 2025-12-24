@@ -30,7 +30,7 @@ char	*get_next_line(int fd);
 
 size_t	ft_strlen(const char *str);
 char	*ft_strdup(char *str);
-//char	*ft_budtrim(char *str, size_t idx);
+char	*ft_budtrim(char *str, size_t idx, char *join);
 //char	*ft_strchr(char	*str, char c);
 char	*ft_strjoin(char *s1, char *s2);
 
