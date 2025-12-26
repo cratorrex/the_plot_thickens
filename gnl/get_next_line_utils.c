@@ -54,7 +54,8 @@ char	*ft_strjoin(char *s1, char *s2)
 		cat++;
 	}
 	join[init + cat] = '\0';
-	free(s1);
+	if(!ft_strlen(s1))
+		free(s1);
 	free(s2);
 	return (join);
 }
@@ -69,32 +70,55 @@ char	*ft_strjoin(char *s1, char *s2)
 //similar to strndup.
 char	*ft_budtrim(char *str, size_t idx, char *join)
 {
-	size_t	i;
-	char	*cat;
+	size_t	incr;
 	char	*ret;
 
-	i = 0;
-	cat = malloc(idx + 1);
-	if (!cat)
-		return (NULL);
-	while (i < idx)
-	{
-		cat[i] = str[i];
-		i ++;
-	}
-	cat[i] = '\0';
-	join = ft_strjoin(join, cat);
-	ret = malloc(ft_strlen(str) - idx + 1);
+	incr = 0;
+	if (idx == 0)
+		return (join);
+	ret = malloc(idx + 1);
 	if (!ret)
-		return (NULL);
-	while (str[i])
+		return (join);
+	while (incr < idx)
 	{
-		ret[i - idx] = str[i];
-		i ++;
+		ret[incr] = str[incr];
+		incr ++;
 	}
-	ret[i - idx] = '\0';
-	return (ret);
+	ret[incr] = '\0';
+	join = ft_strjoin(join, ret);
+	return (join);
 }
+
+// char	*k_budtrim(char *str, size_t idx, char *join)
+// {
+// 	size_t	i;
+// 	char	*cat;
+// 	char	*ret;
+
+// 	i = 0;
+// 	if (idx == 0)
+// 		return (NULL);
+// 	cat = malloc(idx + 1);
+// 	if (!cat)
+// 		return (NULL);
+// 	while (i < idx)
+// 	{
+// 		cat[i] = str[i];
+// 		i ++;
+// 	}
+// 	cat[i] = '\0';
+// 	join = ft_strjoin(join, cat); printf("%s| |%s", join, cat);
+// 	ret = malloc(ft_strlen(str) - idx + 1);
+// 	if (!ret)
+// 		return (NULL);
+// 	while (str[i])
+// 	{
+// 		ret[i - idx] = str[i];
+// 		i ++;
+// 	}
+// 	ret[i - idx] = '\0';
+// 	return (ret);
+// }
 
 //colon three c comma question mark
 char	*ft_strdup(char *str)

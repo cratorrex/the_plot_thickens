@@ -30,11 +30,13 @@ char *trim_t1(char *stastr)
 {
 	//char *str1 = ft_strdup("I'm on the top of the world,");
 	char *str2 = ft_strdup(" looking down on creation");
+	//str2 = ft_strjoin(str1, str2);
 	char *str3 = ft_strjoin(stastr, str2);
 	
 	char *str4 = ft_budtrim(str3, BUFFER_SIZE, stastr);
-	printf("%s\n%s\n", stastr, str3);
+	printf("0:\n1:%s\n2:%s\n", stastr, str3);
 	free(str3);
+	free(stastr);
 	return (str4);
 }
 
@@ -51,8 +53,10 @@ int main(void)
 	static char *stastr;
 	if(stastr == NULL)
 		stastr = ft_strdup("");
+	free(stastr);
 	stastr = ft_strdup("hello world there is life.");
 	stastr = trim_t1(stastr);
+	//stastr = trim_t1(stastr);
 	//printf("JoinT1:\n%s\n-----\n", join_t1());
 	printf("TrimT1:\n%s\n-----\n", stastr);
 	free(stastr);
