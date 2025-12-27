@@ -18,37 +18,37 @@
 
 #include "get_next_line.h"
 
-// //here we go again...
-// ssize_t	ft_strllen(const char *str, ssize_ts)
-// {
-// 	ssize_t	i;
+//here we go again...
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
 
-// 	i = 0;
-// 	while (str[i] != '\n')
-// 		i++;
-// 	return (i);
-// }
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
 
 //both have been malloced. so they have to also be freed.
 //malloc a new string.
 //stash is now s1 cat s2.
-ssize_t	ft_strljoin(char *s1, char *s2, ssize_t size)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	ssize_t	init;
-	ssize_t	cat;
+	size_t	init;
+	size_t	cat;
 	char	*join;
 
 	init = 0;
 	cat = 0;
-	join = malloc(size + ft_memnchr(s2, BUFFER_SIZE) + 1);
+	join = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!join)
 		return (NULL);
-	while (s1[init] && init < size)
+	while (s1[init])
 	{
 		join[init] = s1[init];
 		init++;
 	}
-	while (s2[cat] && init + cat < size)
+	while (s2[cat])
 	{
 		join[init + cat] = s2[cat];
 		cat++;
@@ -60,46 +60,34 @@ ssize_t	ft_strljoin(char *s1, char *s2, ssize_t size)
 	return (join);
 }
 
-//find \n
-//returns the index (idx)
-ssize_t	ft_memnchr(char *str, ssize_t size)
-{
-	ssize_t 	i;
+//find \n or \0.
+// char	*ft_strchr(char	*str, char c)
+// {
 
-	if (size <= 0)
-		return (size);
-	i = 0;
-	while (i < size)
-	{
-		if (str[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (size);
-}
+// }
 
 //just trim and free the front.
 //similar to strndup.
-// char	*ft_budtrim(char *str, ssize_t idx, char *join)
-// {
-// 	ssize_t	incr;
-// 	char	*ret;
+char	*ft_budtrim(char *str, size_t idx, char *join)
+{
+	size_t	incr;
+	char	*ret;
 
-// 	incr = 0;
-// 	if (idx == 0)
-// 		return (join);
-// 	ret = malloc(idx + 1);
-// 	if (!ret)
-// 		return (join);
-// 	while (incr < idx)
-// 	{
-// 		ret[incr] = str[incr];
-// 		incr ++;
-// 	}
-// 	ret[incr] = '\0';
-// 	join = ft_strjoin(join, ret);
-// 	return (join);
-// }
+	incr = 0;
+	if (idx == 0)
+		return (join);
+	ret = malloc(idx + 1);
+	if (!ret)
+		return (join);
+	while (incr < idx)
+	{
+		ret[incr] = str[incr];
+		incr ++;
+	}
+	ret[incr] = '\0';
+	join = ft_strjoin(join, ret);
+	return (join);
+}
 
 // char	*k_budtrim(char *str, size_t idx, char *join)
 // {
@@ -135,7 +123,7 @@ ssize_t	ft_memnchr(char *str, ssize_t size)
 //colon three c comma question mark
 char	*ft_strdup(char *str)
 {
-	ssize_t	i;
+	size_t	i;
 	char	*new;
 
 	new = malloc(ft_strlen(str) + 1);

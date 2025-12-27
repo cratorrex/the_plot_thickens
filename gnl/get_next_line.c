@@ -27,15 +27,27 @@
 // -D BUFFER_SIZE=10
 //
 
+// buffer is declared upon compilation and is thus not a VLA
+
 #include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {
-	static char			*stash;
-	static size_t		r_idx;
+	char			*stash;
+	static size_t	r_idx[1025];
+	static char		buffer[BUFFER_SIZE];
 
 	if (BUFFER_SIZE == 0)
 		return (NULL);
 	stash = NULL;
-	r_idx = 0;
+	while (1)
+	{
+		r_idx[fd] = read(fd, buffer, BUFFER_SIZE); //read into buffer
+		if(r_idx[fd] > 0) //if something was read (and not error)
+		{
+			ft_strljoin(stash, buffer, r_idx[fd]); //dup (join) into stash
+
+		}
+	}
+	return (stash);
 }

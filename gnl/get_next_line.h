@@ -28,11 +28,11 @@
 
 char	*get_next_line(int fd);
 
-size_t	ft_strlen(const char *str);
+ssize_t	ft_strlen(const char *str);
 char	*ft_strdup(char *str);
-char	*ft_budtrim(char *str, size_t idx, char *join);
-//char	*ft_strchr(char	*str, char c);
-char	*ft_strjoin(char *s1, char *s2);
+//char	*ft_budtrim(char *str, ssize_t idx, char *join);
+ssize_t	ft_memnchr(char *str, ssize_t size);
+ssize_t	ft_strljoin(char *s1, char *s2, ssize_t size);
 
 //
 
