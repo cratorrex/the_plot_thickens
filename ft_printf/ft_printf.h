@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/////////////////////////////////////////////|
-//                                          ||
-//   malloc, free, write                    ||
-//                                          ||
-//   va_start, va_arg, va_copy, va_end      ||
+/////////////////////////////////////////////|   //////////////|
+//                                          ||   //           ||
+//   malloc, free, write                    ||   //  libft.h  ||
+//                                          ||   //           ||
+//   va_start, va_arg, va_copy, va_end      ||   //|||||||||||||
 //                                          ||
 //||||||||||||||||||||||||||||||||||||||||||||
 
-//////////////|  ////////////////////////////////////////////////////||
-//           ||  //  c char       d decimal     x small hex          ||
-//  libft.h  ||  //  s string     i integer     X UPPER HEX          ||
-//           ||  //  p pointer    u unsigned    % Control / escape   ||
-//|||||||||||||  ////////////////////////////////////////////////////||
+////////////////////////////////////////////////////||
+//  c char       d decimal     x small hex          ||
+//  s string     i integer     X UPPER HEX          ||
+//  p pointer    u unsigned    % Control / escape   ||
+////////////////////////////////////////////////////||
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
@@ -31,7 +31,9 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <stdio.h>
+# include "libft/libft.h"
 
-int	ft_printf(const char *, ...);
+int		ft_printf(const char *str, ...);
+char	*handle(char flag, va_list args);
 
 #endif
