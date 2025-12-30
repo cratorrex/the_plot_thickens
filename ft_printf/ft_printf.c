@@ -35,9 +35,14 @@ int	ft_printf(const char *str, ...)
 		if (*str == '%')
 		{
 			str++;
-			handle(*str, control);
+			incr += pf_handle(*str, control);
 			str++;
+			continue ;
 		}
+		ft_putchar_fd(*str, 1);
+		str++;
+		incr++;
 	}
 	va_end(control);
+	return (incr);
 }

@@ -34,6 +34,12 @@
 # include "libft/libft.h"
 
 int		ft_printf(const char *str, ...);
-char	*handle(char flag, va_list args);
+int		pf_handle(char flag, va_list args);
+int		handle_char(char c);
+int		handle_str(char *str);
+int		handle_int(int num);
+
+int		pf_handle2(char flag, va_list args);
+int		handle_hex(unsigned int hexa, int mode);
 
 #endif

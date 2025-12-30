@@ -11,8 +11,8 @@ AR_FLAGS := rcs
 
 SRC :=  \
 ft_printf.c ft_printf_handler.c \
-ft_handle_char.c ft_handle_str.c ft_handle_int.c ft_handle_uint.c \
-ft_handle_hex.c ft_handle_heX.c ft_handle_point.c 
+ft_handle_char.c ft_handle_str.c ft_handle_int_dec.c ft_handle_uint.c \
+ft_handle_hex.c ft_handle_point.c 
 
 # BONUS := 
 
