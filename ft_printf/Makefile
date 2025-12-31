@@ -40,10 +40,13 @@ $(SUBDIRS)/$(LIBFT):
 %.o: %.c $(HEADER)
 	$(CC) $(CC_FLAGS) -c $< -o $@
 
-clean:
+clean: 
 	rm -f $(OBJ) $(BONUS_OBJ)
 
-fclean: clean
+subclean:
+	$(MAKE) fclean -C $(SUBDIRS)
+
+fclean: clean subclean
 	rm -f $(NAME)
 
 re: fclean all
@@ -51,5 +54,5 @@ re: fclean all
 # > make fclean 
 # |> internally calls the commands in order 'clean >> fclean'
 
-.PHONY: all clean fclean re
+.PHONY: all clean subclean fclean re
 # bonus
