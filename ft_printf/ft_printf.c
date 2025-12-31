@@ -28,6 +28,8 @@ int	ft_printf(const char *str, ...)
 	int		incr;
 	va_list	control;
 
+	if (!str)
+		return (-1);
 	incr = 0;
 	va_start(control, str);
 	while (*str)
@@ -36,6 +38,8 @@ int	ft_printf(const char *str, ...)
 		{
 			str++;
 			incr += pf_handle(*str, control);
+			if(*str == '\0')
+				break ;
 			str++;
 			continue ;
 		}
