@@ -81,7 +81,7 @@ Yes... this must be escaped.</td><td>NO</td></tr>
 <tr><td>String</td>
 <td><code>s</code></td>
 <td><code>char *</code></td>
-<td>Outputs a literal string.</td><td rowspan=6>YES</td></tr>
+<td>Outputs a literal string.</td><td rowspan=7>YES</td></tr>
 
 <tr><td>Integer</td>
 <td><code>i</code></td>
