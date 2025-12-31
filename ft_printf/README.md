@@ -86,15 +86,17 @@ Yes... this must be escaped.</td><td>NO</td></tr>
 <tr><td>Integer</td>
 <td><code>i</code></td>
 <td rowspan=2><code>int</code></td>
-<td rowspan=2>Outputs a number as a string.<br/>
-Uses <code>ft_itoa()</code> which requires <code>free()</code>.</td></tr>
+<td rowspan=3>Outputs a number as a string.</td></tr>
 
 <tr><td>Decimal</td>
 <td><code>d</code></td>
 
+<tr><td>Unsigned Integer</td>
+<td><code>u</code></td>
+<td rowspan=3><code>unsigned int</code></td></tr>
+
 <tr><td>Hexadecimal (Lower)</td>
 <td><code>x</code></td>
-<td rowspan=2><code>unsigned int</code></td>
 <td>Converts the given integer into a <code>BASE16</code> hexadecimal. Outputs the hex digits in <code>lowercase</code>.</td></tr>
 
 <tr><td>Hexadecimal (Upper)</td>
