@@ -23,7 +23,7 @@ int	pf_handle(char flag, va_list args)
 	else if (flag == 'i' || flag == 'd')
 		return (handle_int(va_arg(args, int)));
 	// else if (flag == 'u')
-	// 	handle_uint();
+	// 	return (handle_uint(va_arg(args, unsigned int)));
 	else
 		return (pf_handle2(flag, args));
 }

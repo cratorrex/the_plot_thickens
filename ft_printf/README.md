@@ -19,8 +19,7 @@ bytes_written = ft_printf("Hello world%c %s %i.%%", '!', "Hope you have a wonder
 ```
 It is good to remember that this implementation of printf does not handle all the flags of the common printf function, but rather the following flags:  
 `c` `s` `i` `d` `u` `p` `x` `X` `%`  
-In the case where this repository is updated post-validation of the project, additional flags will be reflected in the overview section.  
-See more: [Overview](#Overview-of-Deliverable).
+In the case where this repository is updated post-validation of the project, additional flags will be reflected in the [Overview](#Overview-of-Deliverable) section.  
 
 ## Instructions
 Makefile: all, clean, subclean, fclean, re.
@@ -34,9 +33,17 @@ The Makefile in this directory will also trigger the Makefile in the included `l
 
 
 ## Resources
-Microsoft (via learn.microsoft.com) and Manual Documentations for the respective allowed functions and macros as preliminary research.
+Microsoft (via learn.microsoft.com) and Manual Documentations for the respective allowed functions and macros as preliminary research.  
+- [printf](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/printf-printf-l-wprintf-wprintf-l)  
+  - [Format Specification](https://learn.microsoft.com/en-us/cpp/c-runtime-library/format-specification-syntax-printf-and-wprintf-functions)
+  - [Variable argument lists](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/va-arg-va-copy-va-end-va-start)  
+    - [Argument access](https://learn.microsoft.com/en-us/cpp/c-runtime-library/argument-access)
+  - [`errno` / `EINVAL` flag](https://learn.microsoft.com/en-us/cpp/c-runtime-library/errno-constants) 
+    > Look for value 22 in the table...
+	> Additionally, since all of these are errors to some capacity, they will not be considered.
 
-[Variadic Functions](https://en.wikipedia.org/wiki/Variadic_function)
+[printf(3) - man](https://linux.die.net/man/3/printf)  
+[Variadic Functions - Wikipedia](https://en.wikipedia.org/wiki/Variadic_function)
 
 ### AI Usage
 The only time AI was used in this project was ironically to walk through how to convert decimal to a base16 hexadecimal... I mean that both generously and self-depricatively.
@@ -45,26 +52,26 @@ The only time AI was used in this project was ironically to walk through how to 
 Just like with `libft`, we need to reproduce a reasonable amount of functionality from the `printf` function.  
 The `va_arg` column denotes flags that have been used in the repos that will advance the list of arguments passed into the function.
 
-<table><thead>
+<table>
 <tr><td colspan=5><strong>Project Basic Requirements</strong></td></tr>
 
 <tr><td rowspan=5>Allowed Functions</td>
 <td colspan=2>malloc, free, write</td>
 <td colspan=2>Mostly used in <code>libft</code></td></tr>
 
-<tr><td>va_start</td><td colspan=3>Denotes the <code>va_list</code> of arguments, starting after the first argument passed.<br/>
-<code>printf("Some %str%ing I want to pass %in...",<code>basically, anything in here, delimited by the ',' char.</code>)</code></td></tr>
+<tr><td>va_start</td><td colspan=3>Sets the pointer to the start of the <code>va_list</code> passed.</td></tr>
 
-<tr><td>va_arg</td><td colspan=3>Returns the next argument in the specified <code>va_list</code> as the specified <code>type</code>.</td></tr>
+<tr><td>va_arg</td><td colspan=3>Returns the next argument in the <code>va_list</code> as the specified <code>type</code>.</td></tr>
 
-<tr><td>va_copy</td><td colspan=3>Copies the indicated <code>va_start</code> to another <code>va_list</code> variable.</td></tr>
+<tr><td>va_copy</td><td colspan=3>Copies the <code>va_list</code>.</td></tr>
 
-<tr><td>va_end</td><td colspan=3>End of the <code>va_list</code>. Basically a "Close" function.</td></tr>
+<tr><td>va_end</td><td colspan=3>End of the <code>va_list</code>.</td></tr>
 
-<tr><td colspan=5>All of these follow the format of <code>%f</code>, where <code>f</code> represents the associated flag.</td></tr>
+<tr><td colspan=5>All of these follow the format of <code>%f</code>, where <code>f</code> represents the associated flag.</td></tr></table>
 
-<tr><td colspan=5><hr/></td></tr>
+<hr/>
 
+<table><thead>
 <tr><td>Name</td><td>Flag</td><td>Type</td><td>Description</td><td>va_arg?</td></tr>
 </thead>
 
@@ -76,7 +83,7 @@ The `va_arg` column denotes flags that have been used in the repos that will adv
 <tr><td><code>%</code> Percentage sign</td>
 <td><code>%</code></td>
 <td>Outputs the <code>%</code> character literal.<br/>
-Yes... this must be escaped.</td><td>NO</td></tr>
+Yes... this must be escaped as <code>%%</code>.</td><td>NO</td></tr>
 
 <tr><td>String</td>
 <td><code>s</code></td>
@@ -106,4 +113,64 @@ Yes... this must be escaped.</td><td>NO</td></tr>
 <tr><td>Pointer Value</td>
 <td><code>p</code></td>
 <td>TBA</td>
-<td>Outputs a TBA.</td></tr>
+<td>Outputs a TBA.</td></tr></table>
+
+### Edge Case and Error Handling
+These errors were also handled against the expected output of the actual printf.
+
+```c
+//1. Basic NULL
+ft_printf(NULL); //Expected -1
+```
+
+```c
+//2. Incomplete Flag (%\0)
+ft_printf("%");
+ft_printf("any amount of text %");
+//Expected for all -1
+
+//This is tame compared to Case 5... 
+//Since this wasn't necessarily part of the requirement,
+//I considered both as errors (-1).
+//Wait until you hear that this is actually error (-22).
+```
+
+```c
+//3. String NULL
+ft_printf("%s", NULL); 
+//Expected to print "(null)" verbatim.
+//Consequently adding 6 to the return value.
+```
+
+```c
+//4. Integer NULL (incl. unsigned)
+ft_printf("%i, %d, %x, %X.", NULL, NULL, NULL, NULL); 
+//Expected all to print "0", resulting in the following output.
+//"0, 0, 0, 0."
+```
+
+```c
+//5. Invalid Flag (%?)
+
+//Invalid flags by the interpreter is treated as an error by printf,
+//but execution is allowed to continue.
+//Regardless, since it is an error,
+//this repository's implementation will return -1.
+
+ft_printf("p%q");
+ft_printf("p%q", "a");
+//printf expected both returns -1 and print "p"
+
+ft_printf("p%y");
+ft_printf("p%y", "a");
+//printf expected both returns 3 and print "p%y"
+
+ft_printf("q%yt%q");
+ft_printf("q%yt%q", "a", "a");
+//printf expected both returns 5 and print "q%yt%"
+```
+
+```c
+//
+ft_printf(); //
+```

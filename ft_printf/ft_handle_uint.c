@@ -13,3 +13,15 @@
 #include "ft_printf.h"
 
 
+
+// int	handle_uint(int num)
+// {
+// 	char	*val;
+// 	size_t	len;
+
+// 	val = ft_utoa(num);
+// 	len = ft_strlen(val);
+// 	free(val);
+// 	ft_putnbr_fd(num, 1);
+// 	return (len);
+// }

@@ -35,6 +35,7 @@
 
 int		ft_printf(const char *str, ...);
 int		pf_handle(char flag, va_list args);
+int		pf_echr(char flag, va_list args);
 int		handle_char(char c);
 int		handle_str(char *str);
 int		handle_int(int num);
